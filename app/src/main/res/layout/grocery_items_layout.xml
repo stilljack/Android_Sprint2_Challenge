@@ -12,7 +12,8 @@
 
   <LinearLayout
       android:layout_width="wrap_content"
-      android:layout_height="match_parent">
+      android:layout_height="match_parent"
+      android:id="@+id/llcardview">
 
         <ImageView
             android:id="@+id/iv_item_drawable"

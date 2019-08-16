@@ -2,9 +2,12 @@ package com.lambdaschool.sprint2_challenge
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import com.lambdaschool.sprint2_challenge.ShoppingItemRepository.Companion.createShoppingList
 import com.lambdaschool.sprint2_challenge.ShoppingItemRepository.Companion.shoppingList
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     // ShoppingItemRepository (my understanding of the word respository also grew last night, Vivek is a good teacher.)
     //2.X: call createShoppingList() onCreate in mainAcitivty to populate the mutable list
     //3: ok data seems sane, xml for the card view next
+    //4: listadapter after some reverting and ironing out dependancies
 
 
 
@@ -23,5 +27,11 @@ class MainActivity : AppCompatActivity() {
         createShoppingList()
 
         Log.i("testthelist","$shoppingList")
+
+        recycle_view.setHasFixedSize(true)
+        val manager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        val adapter = ShoppingListAdapter(shoppingList)
+        recycle_view.layoutManager = manager
+        recycle_view.adapter = adapter
     }
 }

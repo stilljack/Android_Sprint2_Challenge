@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     //9: retrieve from the shoppingList any items that have the ordered booleon set to true
     //10: send retrieved list of objects to a log to see if it work, it works
     //11: look up old project to figure out how to do implicit intents
+    //11.5: intent actually does work, just wildly slow on my emulator
 
     fun makeNotification(text:String) {
         val contentIntent = Intent(this, MainActivity::class.java)
@@ -52,8 +53,8 @@ class MainActivity : AppCompatActivity() {
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
                 .setPriority(NotificationManager.IMPORTANCE_HIGH)
                 .setSmallIcon(android.R.drawable.ic_media_ff)
-                .setContentTitle("Groceries orders!")
-                .setContentText("Your order of $text is on it's way")
+                .setContentTitle("Groceries list!")
+                .setContentText("Your groceries list is being sent to the app of your choice")
                 .setContentIntent(pendingContentIntent)
                 .setAutoCancel(true)
         notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())
@@ -77,25 +78,20 @@ class MainActivity : AppCompatActivity() {
         btn_button.setOnClickListener{
             for (item in shoppingList){
                 if (item.ordered) {
-                    finalstr += "${item.kind}, "
+                    finalstr += "${item.kind}; "
                 }
-                makeNotification(finalstr)
-                sendListIntent()
+                //makeNotification(finalstr)
+
+               val sendIntent: Intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, "$finalstr")
+                    type = "text/plain"
+                }
+                startActivity(sendIntent)
             }
         }
 
     }
-    fun sendListIntent(){
-        //Log.i("testthe2ndlist","$list")
 
-        val sendIntent: Intent = Intent().apply {
-            action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, finalstr)
-            type = "text/plain"
-        }
-        startActivity(sendIntent)
-
-
-    }
 }
 

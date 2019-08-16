@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     //2.X: call createShoppingList() onCreate in mainAcitivty to populate the mutable list
     //3: ok data seems sane, xml for the card view next
     //4: listadapter after some reverting and ironing out dependancies
+    //5: add frame restrcited submit order button to xml layout
 
 
 

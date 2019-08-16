@@ -26,7 +26,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/cl">
 
         <Button
-            android:id="@+id/bottom_button"
+            android:id="@+id/btn_button"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/colorPrimary"

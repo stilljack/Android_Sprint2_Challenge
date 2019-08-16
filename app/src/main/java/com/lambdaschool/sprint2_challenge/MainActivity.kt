@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     companion object {
         const val NOTIFICATION_ID = 1
-
+        val finalList = mutableListOf<GroceryItems>()
     }
     //going to try some high level notes here like i saw vivek do last night, seemed good
     //step 1 object class (GroceryItems) to define what an individual items qualities will be
@@ -33,6 +33,8 @@ class MainActivity : AppCompatActivity() {
     //7: set launcher icon before i forget
     //8: set notification capability on click
     //9: retrieve from the shoppingList any items that have the ordered booleon set to true
+    //10: send retrieved list of objects to a log to see if it work, it works
+    //11: look up old project to figure out how to do implicit intents
 
     fun makeNotification() {
         val contentIntent = Intent(this, MainActivity::class.java)
@@ -73,8 +75,17 @@ class MainActivity : AppCompatActivity() {
 
         btn_button.setOnClickListener{
             makeNotification()
+            for (i in 0 until shoppingList.size){
+                if (shoppingList[i].ordered) {
+                    finalList.add(shoppingList[i])
+                }
+
+                sendListIntent(finalList)
+            }
         }
 
-
     }
+    fun sendListIntent(list: MutableList<GroceryItems>){
+        Log.i("testthelist","$list")}
 }
+

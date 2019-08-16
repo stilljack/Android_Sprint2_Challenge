@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
                 if (item.ordered) {
                     finalstr += "${item.kind}; "
                 }
-                //makeNotification(finalstr)
+                makeNotification(finalstr)
 
                val sendIntent: Intent = Intent().apply {
                     action = Intent.ACTION_SEND

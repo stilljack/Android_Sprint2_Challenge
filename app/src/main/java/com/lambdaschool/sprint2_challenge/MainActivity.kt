@@ -44,17 +44,17 @@ class MainActivity : AppCompatActivity() {
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = "Notification Channel"
-            val importance = NotificationManager.IMPORTANCE_HIGH
+            val importance = NotificationManager.IMPORTANCE_MIN
             val description = "NOTIFICATION CHANNEL DESCRIPTION"
             val channel = NotificationChannel(channelId, name, importance)
             channel.description = description
             notificationManager.createNotificationChannel(channel)
         }
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
-                .setPriority(NotificationManager.IMPORTANCE_HIGH)
+                .setPriority(NotificationManager.IMPORTANCE_MIN)
                 .setSmallIcon(android.R.drawable.ic_media_ff)
                 .setContentTitle("Groceries list!")
-                .setContentText("Your groceries list is being sent to the app of your choice")
+                .setContentText("Your groceries list is being sent to the app of your choice $text")
                 .setContentIntent(pendingContentIntent)
                 .setAutoCancel(true)
         notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())
@@ -80,18 +80,21 @@ class MainActivity : AppCompatActivity() {
                 if (item.ordered) {
                     finalstr += "${item.kind}; "
                 }
+            }
                 makeNotification(finalstr)
 
-               val sendIntent: Intent = Intent().apply {
-                    action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, "$finalstr")
-                    type = "text/plain"
-                }
-                startActivity(sendIntent)
+
+                   val sendIntent: Intent = Intent().apply {
+                       action = Intent.ACTION_SEND
+                       putExtra(Intent.EXTRA_TEXT, "$finalstr")
+                       type = "text/plain"
+                   }
+                   startActivity(Intent.createChooser(sendIntent, resources.getText(R.string.send_to)))
+
+
             }
         }
 
     }
 
-}
 

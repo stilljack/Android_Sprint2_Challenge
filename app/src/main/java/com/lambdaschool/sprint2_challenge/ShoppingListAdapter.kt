@@ -11,11 +11,7 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.grocery_items_layout.view.*
 
 class ShoppingListAdapter(val shoppingList: MutableList<GroceryItems>) : RecyclerView.Adapter<ShoppingListAdapter.ViewHolder>() {
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val imageIv: ImageView = view.iv_item_drawable
-        val nameTv: TextView = view.tv_item_name
-        val parentView: LinearLayout = view.llcardview
-    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val viewGroup = LayoutInflater.from(parent.context).inflate(R.layout.grocery_items_layout, parent, false)
@@ -30,12 +26,33 @@ class ShoppingListAdapter(val shoppingList: MutableList<GroceryItems>) : Recycle
         holder.nameTv.text = shoppingList[position].kind
         holder.imageIv.setImageResource(shoppingList[position].resourceId)
 
-        if (shoppingList[position].ordered) {
-            holder.parentView.setBackgroundColor(ContextCompat.getColor(holder.parentView.context, R.color.bought))
+        val currentSelection = shoppingList[position]
+        holder.bindModel(currentSelection)
+
+        holder.parentView.setOnClickListener {
+            if (currentSelection.ordered) {
+                currentSelection.ordered = false
+                notifyItemChanged(position)
+            } else {
+                currentSelection.ordered = true
+                notifyItemChanged(position)
+            }
         }
-        else {
-            holder.parentView.setBackgroundColor(ContextCompat.getColor(holder.parentView.context, R.color.unbought))
+
+        }
+
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val imageIv: ImageView = view.iv_item_drawable
+        val nameTv: TextView = view.tv_item_name
+        val parentView: LinearLayout = view.llcardview
+
+        fun bindModel(currentSelection: GroceryItems) {
+            if (currentSelection.ordered) {
+                parentView.setBackgroundColor(ContextCompat.getColor(parentView.context, R.color.bought))
+            } else {
+                parentView.setBackgroundColor(ContextCompat.getColor(parentView.context, R.color.unbought))
+            }
         }
     }
+    }
 
-}

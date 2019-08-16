@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
     //3: ok data seems sane, xml for the card view next
     //4: listadapter after some reverting and ironing out dependancies
     //5: add frame restrcited submit order button to xml layout
+    //6: added onclick to items to indicate an order (green is selected -- white is unselected )
+    //7:
 
 
 

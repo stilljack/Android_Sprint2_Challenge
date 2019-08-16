@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     companion object {
         const val NOTIFICATION_ID = 1
-        val finalList = mutableListOf<GroceryItems>()
+        var finalstr = ""
     }
     //going to try some high level notes here like i saw vivek do last night, seemed good
     //step 1 object class (GroceryItems) to define what an individual items qualities will be
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
     //10: send retrieved list of objects to a log to see if it work, it works
     //11: look up old project to figure out how to do implicit intents
 
-    fun makeNotification() {
+    fun makeNotification(text:String) {
         val contentIntent = Intent(this, MainActivity::class.java)
         val pendingContentIntent = PendingIntent.getActivity(this, 0, contentIntent, PendingIntent.FLAG_ONE_SHOT)
         val channelId = "$packageName.channel"
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = "Notification Channel"
             val importance = NotificationManager.IMPORTANCE_HIGH
-            val description = "NOTIFCATION CHANNEL DESCRIPTION"
+            val description = "NOTIFICATION CHANNEL DESCRIPTION"
             val channel = NotificationChannel(channelId, name, importance)
             channel.description = description
             notificationManager.createNotificationChannel(channel)
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
                 .setPriority(NotificationManager.IMPORTANCE_HIGH)
                 .setSmallIcon(android.R.drawable.ic_media_ff)
                 .setContentTitle("Groceries orders!")
-                .setContentText("Your food should arrive one day!")
+                .setContentText("Your order of $text is on it's way")
                 .setContentIntent(pendingContentIntent)
                 .setAutoCancel(true)
         notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())
@@ -61,11 +61,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val finalList = mutableListOf<GroceryItems>()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         createShoppingList()
 
-        Log.i("testthelist","$shoppingList")
+        //Log.i("testthelist","$shoppingList")
 
         recycle_view.setHasFixedSize(true)
         val manager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
@@ -74,18 +75,27 @@ class MainActivity : AppCompatActivity() {
         recycle_view.adapter = adapter
 
         btn_button.setOnClickListener{
-            makeNotification()
-            for (i in 0 until shoppingList.size){
-                if (shoppingList[i].ordered) {
-                    finalList.add(shoppingList[i])
+            for (item in shoppingList){
+                if (item.ordered) {
+                    finalstr += "${item.kind}, "
                 }
-
-                sendListIntent(finalList)
+                makeNotification(finalstr)
+                sendListIntent()
             }
         }
 
     }
-    fun sendListIntent(list: MutableList<GroceryItems>){
-        Log.i("testthelist","$list")}
+    fun sendListIntent(){
+        //Log.i("testthe2ndlist","$list")
+
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, finalstr)
+            type = "text/plain"
+        }
+        startActivity(sendIntent)
+
+
+    }
 }
 

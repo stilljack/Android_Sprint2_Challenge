@@ -77,6 +77,7 @@ class MainActivity : AppCompatActivity() {
         recycle_view.adapter = adapter
 
         btn_button.setOnClickListener{
+            finalstr = ""
             for (item in shoppingList){
                 if (item.ordered) {
                     finalstr += "${item.kind}; "

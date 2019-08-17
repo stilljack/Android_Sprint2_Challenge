@@ -1,4 +1,4 @@
-package com.lambdaschool.sprint2_challenge
+package com.lambdaschool.sprint2_challenge.recycleView
 
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.lambdaschool.sprint2_challenge.R
+import com.lambdaschool.sprint2_challenge.model.GroceryItems
 import kotlinx.android.synthetic.main.grocery_items_layout.view.*
 
 class ShoppingListAdapter(val shoppingList: MutableList<GroceryItems>) : RecyclerView.Adapter<ShoppingListAdapter.ViewHolder>() {

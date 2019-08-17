@@ -11,9 +11,10 @@ import android.os.Bundle
 import android.support.v4.app.NotificationCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
-import com.lambdaschool.sprint2_challenge.ShoppingItemRepository.Companion.createShoppingList
-import com.lambdaschool.sprint2_challenge.ShoppingItemRepository.Companion.shoppingList
+import com.lambdaschool.sprint2_challenge.model.GroceryItems
+import com.lambdaschool.sprint2_challenge.model.ShoppingItemRepository.Companion.createShoppingList
+import com.lambdaschool.sprint2_challenge.model.ShoppingItemRepository.Companion.shoppingList
+import com.lambdaschool.sprint2_challenge.recycleView.ShoppingListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

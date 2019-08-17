@@ -17,7 +17,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/grocery_items_layout">
+        tools:listitem="@layout/grocery_items_layout"
+       >
     </android.support.v7.widget.RecyclerView>
 
     <FrameLayout
@@ -25,7 +26,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
-        app:layout_constraintBottom_toBottomOf="@+id/cl">
+        app:layout_constraintBottom_toBottomOf="@+id/cl"
+        android:animateLayoutChanges="true"
+        >
 
         <Button
             android:id="@+id/btn_button"
@@ -33,6 +36,7 @@
             android:layout_height="50dp"
             android:background="@color/colorPrimary"
             android:text="submit"
+            android:animateLayoutChanges="true"
            />
     </FrameLayout>
 

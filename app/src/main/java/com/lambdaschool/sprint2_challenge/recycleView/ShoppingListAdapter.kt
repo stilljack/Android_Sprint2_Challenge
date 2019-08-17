@@ -59,5 +59,6 @@ class ShoppingListAdapter(val shoppingList: MutableList<GroceryItems>) : Recycle
     }
 
 
-    }
+}
+
 

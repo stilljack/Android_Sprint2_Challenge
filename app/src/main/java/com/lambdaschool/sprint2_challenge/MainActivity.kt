@@ -67,7 +67,6 @@ class MainActivity : AppCompatActivity() {
         val finalList = mutableListOf<GroceryItems>()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        createShoppingList()
 
         //Log.i("testthelist","$shoppingList")
 

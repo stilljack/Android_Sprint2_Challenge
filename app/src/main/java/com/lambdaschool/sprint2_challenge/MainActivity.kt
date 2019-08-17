@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     //11: look up old project to figure out how to do implicit intents
     //11.5: intent actually does work, just wildly slow on my emulator
     //epilogue: nope, I had placed closing curly brackets incorrectly and was triggering a solid few dozen notifications and shares -- works fine now if not terribly pretty
-    //12: changed so it sends to a checkout page with fewer items
+
     fun makeNotification(text:String) {
         val contentIntent = Intent(this, MainActivity::class.java)
         val pendingContentIntent = PendingIntent.getActivity(this, 0, contentIntent, PendingIntent.FLAG_ONE_SHOT)
@@ -64,9 +64,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val finalList = mutableListOf<GroceryItems>()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        createShoppingList()
 
         //Log.i("testthelist","$shoppingList")
 

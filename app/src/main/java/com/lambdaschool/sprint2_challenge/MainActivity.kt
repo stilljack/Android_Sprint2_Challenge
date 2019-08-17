@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     //11: look up old project to figure out how to do implicit intents
     //11.5: intent actually does work, just wildly slow on my emulator
     //epilogue: nope, I had placed closing curly brackets incorrectly and was triggering a solid few dozen notifications and shares -- works fine now if not terribly pretty
-
+    //12: changed so it sends to a checkout page with fewer items
     fun makeNotification(text:String) {
         val contentIntent = Intent(this, MainActivity::class.java)
         val pendingContentIntent = PendingIntent.getActivity(this, 0, contentIntent, PendingIntent.FLAG_ONE_SHOT)
@@ -85,14 +85,17 @@ class MainActivity : AppCompatActivity() {
                 }
             }
                 makeNotification(finalstr)
+             var action = Intent(this,FullscreenActivity::class.java)
+                     //action.putExtra("action", "$finalstr")
+                     startActivity(action)
 
-
-                   val sendIntent: Intent = Intent().apply {
-                       action = Intent.ACTION_SEND
-                       putExtra(Intent.EXTRA_TEXT, "$finalstr")
-                       type = "text/plain"
-                   }
-                   startActivity(Intent.createChooser(sendIntent, resources.getText(R.string.send_to)))
+                  /// val sendIntent: Intent = Intent().apply {
+                       //action = Intent.ACTION_SEND
+                      /// action = Intent(this,FullscreenActivity::class.java)
+                       //                       putExtra(Intent.EXTRA_TEXT, "$finalstr")
+                       //                       type = "text/plain"
+                 //  }
+                //   startActivity(Intent.createChooser(sendIntent, resources.getText(R.string.send_to)))
 
 
             }

@@ -38,6 +38,7 @@ class ShoppingListAdapter(val shoppingList: MutableList<GroceryItems>) : Recycle
             } else {
                 currentSelection.ordered = true
                 notifyItemChanged(position)
+
             }
         }
 
@@ -56,5 +57,7 @@ class ShoppingListAdapter(val shoppingList: MutableList<GroceryItems>) : Recycle
             }
         }
     }
+
+
     }
 
